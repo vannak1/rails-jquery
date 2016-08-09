@@ -1,7 +1,8 @@
-<!-- <div class="container">
+<div class="container">
 <h1>Listing Discussions | <%= link_to 'New Discussion', new_discussion_path %></h1>
 </div>
 
+<!--
 <% Discussion.all.each do |discussion| %>
 <div class="container">
   <div class="row" style="margin-top: 10px;">
@@ -29,14 +30,82 @@
 <div class="j-discussion">
 </div>
 
+<!-- begin form -->
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 bg-white" style="margin-top: 10px;">
+      <h3> New Discussion </h3>
+<%= form_for(@discussion) do |f| %>
+  <% if @discussion.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@discussion.errors.count, "error") %> prohibited this discussion from being saved:</h2>
+
+      <ul>
+      <% @discussion.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset class="form-group">
+    <%= f.label :title %><br>
+    <%= f.text_field :title, class: "form-control" %>
+  </fieldset>
+
+  <fieldset class="form-group">
+    <%= f.label :content %><br>
+    <%= f.text_area :content, class: "form-control" %>
+  </fieldset>
+  <div class="actions">
+    <%= f.submit 'Submit', class: "btn btn-primary pull-right" %>
+  </div>
+<% end %>
+</div>
+</div>
+</div>
+
+
 <script type="text/javascript" charset="utf-8">
 $(function () {
+  $('form').submit(function(event) {
+    event.preventDefault();
+    var values = $(this).serialize();
+    var posting = $.post('discussions', values);
+
+    posting.done(function(data){
+      var html = "";
+      html += '<div class="discussion-thread" data-id=' + data.id + '>'
+      html += '<div class="container">'
+      html += '  <div class="row" style="margin-top: 10px;">'
+      html += '    <div class="col-md-8 bg-white">'
+      html += '      <div class="media">'
+      html += '        <div class="media-left">'
+      html += '            <%= image_tag("pen") %>'
+      html += '        </div>'
+      html += '        <div class="media-body">'
+      html += '          <h3 class="media-heading font-1">' + data.title + '</h3>'
+      html += '          <p>Asked by ' + data["user"]["name"] + '</p>'
+      html += '          <a href="/discussions/' + data.id + '">Show</a>'
+      html += '          <% if current_user.admin? %>'
+      html += '            <%= link_to 'Edit', edit_discussion_path(discussion) %> | <%= link_to 'Destroy', discussion, method: :delete, data: { confirm: 'Are you sure?' } %>'
+      html += '          <% end %>'
+      html += '       </div>'
+      html += '      </div>'
+      html += '    </div>'
+      html += '  </div>'
+      html += '</div>'
+      html += '</div>'
+      $(".j-discussion").append(html);
+    });
+  });
+
   $(document).ready(function() {
     var html = "";
     $.get("/discussions.json", function(data) {
          var len = data.length;
          for(var i = 0; i < len; i++){
-          //  html += "<li><a href= 'discussions/" + data[i].id + "'>" + data[i].title + "</a></li>"
+          html += '<div class="discussion-thread" data-id=' + data[i].id + '>'
           html += '<div class="container">'
           html += '  <div class="row" style="margin-top: 10px;">'
           html += '    <div class="col-md-8 bg-white">'
@@ -56,8 +125,8 @@ $(function () {
           html += '    </div>'
           html += '  </div>'
           html += '</div>'
+          html += '</div>'
          }
-      html += "</ul>";
       $(".j-discussion").html(html);
     });
   });

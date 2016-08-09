@@ -5,6 +5,7 @@ class DiscussionsController < ApplicationController
   # GET /discussions.json
   def index
     @discussions = Discussion.all.order("created_at DESC")
+    @discussion = Discussion.new
     respond_to do |format|
       format.html { render :index}
       format.json { render json: @discussions}
@@ -29,12 +30,10 @@ class DiscussionsController < ApplicationController
   # POST /discussions.json
   def create
     @discussion = current_user.discussions.build(discussion_params)
-    respond_to do |format|
-      if @discussion.save
-        format.html { redirect_to @discussion, notice: 'Discussion was successfully created.' }
-      else
-        format.html { render :new }
-      end
+    if @discussion.save
+      render json: @discussion, status: 201
+    else
+      render :new
     end
   end
 

@@ -6,23 +6,3 @@
   <%= f.submit 'Create Comment', class: "btn btn-primary" %>
 <% end %>
 <div>
-
-
-  <script type="text/javascript" charset="utf-8">
-    $(function () {
-      $('form').submit(function(event) {
-        //prevent form from submitting the default way
-        event.preventDefault();
-
-        var values = $(this).serialize();
-
-        var posting = $.post('/posts', values);
-
-        posting.done(function(data) {
-          var post = data["post"];
-          $("#postTitle").text(post["title"]);
-          $("#postBody").text(post["description"]);
-        });
-      });
-    });
-  </script>
