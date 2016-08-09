@@ -8,9 +8,9 @@ class CommentsController < ApplicationController
     @comment.votes.create(user_id: current_user.id)
 
     if @comment.save
-      redirect_to discussion_path(@discussion)
+      render json: @comment, status: 201
     else
-      render 'new'
+      redirect_to discussion_path(@discussion)
     end
   end
 

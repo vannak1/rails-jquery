@@ -10,6 +10,10 @@ class UsersController < ApplicationController
   def show
     @user = current_user
     authorize(@user)
+    respond_to do |f|
+      f.html { render :show }
+      f.json { render json: @user}
+    end
   end
 
   def update

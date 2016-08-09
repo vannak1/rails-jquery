@@ -5,6 +5,10 @@ class DiscussionsController < ApplicationController
   # GET /discussions.json
   def index
     @discussions = Discussion.all.order("created_at DESC")
+    respond_to do |format|
+      format.html { render :index}
+      format.json { render json: @discussions}
+    end
   end
 
   # GET /discussions/1

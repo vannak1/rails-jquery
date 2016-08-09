@@ -1,27 +1,65 @@
-<div class="container">
+<!-- <div class="container">
 <h1>Listing Discussions | <%= link_to 'New Discussion', new_discussion_path %></h1>
 </div>
 
 <% Discussion.all.each do |discussion| %>
-  <div class="container">
-    <div class="row" style="margin-top: 10px;">
-      <div class="col-md-8 bg-white">
-        <div class="media">
-          <div class="media-left">
-              <%= image_tag("pen") %>
-          </div>
-          <div class="media-body">
-            <h3 class="media-heading font-1"><%= discussion.title %></h3>
-            <%= link_to 'Show', discussion %>
-            <% if discussion.user == current_user || current_user.admin? %>
-              | <%= link_to 'Edit', edit_discussion_path(discussion) %>
-            <% end %>
-            <% if current_user.admin? %>
-              | <%= link_to 'Destroy', discussion, method: :delete, data: { confirm: 'Are you sure?' } %>
-            <% end %>
-         </div>
+<div class="container">
+  <div class="row" style="margin-top: 10px;">
+    <div class="col-md-8 bg-white">
+      <div class="media">
+        <div class="media-left">
+            <%= image_tag("pen") %>
         </div>
+        <div class="media-body">
+          <h3 class="media-heading font-1"><%= discussion.title %></h3>
+          <%= link_to 'Show', discussion %>
+          <% if discussion.user == current_user || current_user.admin? %>
+            | <%= link_to 'Edit', edit_discussion_path(discussion) %>
+          <% end %>
+          <% if current_user.admin? %>
+            | <%= link_to 'Destroy', discussion, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
+       </div>
       </div>
     </div>
   </div>
-<% end %>
+</div>
+<% end %> -->
+
+<div class="j-discussion">
+</div>
+
+<script type="text/javascript" charset="utf-8">
+$(function () {
+  $(document).ready(function() {
+    var html = "";
+    $.get("/discussions.json", function(data) {
+         var len = data.length;
+         for(var i = 0; i < len; i++){
+          //  html += "<li><a href= 'discussions/" + data[i].id + "'>" + data[i].title + "</a></li>"
+          html += '<div class="container">'
+          html += '  <div class="row" style="margin-top: 10px;">'
+          html += '    <div class="col-md-8 bg-white">'
+          html += '      <div class="media">'
+          html += '        <div class="media-left">'
+          html += '            <%= image_tag("pen") %>'
+          html += '        </div>'
+          html += '        <div class="media-body">'
+          html += '          <h3 class="media-heading font-1">' + data[i].title + '</h3>'
+          html += '          <p>Asked by ' + data[i]["user"]["name"] + '</p>'
+          html += '          <a href="/discussions/' + data[i].id + '">Show</a>'
+          html += '          <% if current_user.admin? %>'
+          html += '            <%= link_to 'Edit', edit_discussion_path(discussion) %> | <%= link_to 'Destroy', discussion, method: :delete, data: { confirm: 'Are you sure?' } %>'
+          html += '          <% end %>'
+          html += '       </div>'
+          html += '      </div>'
+          html += '    </div>'
+          html += '  </div>'
+          html += '</div>'
+         }
+      html += "</ul>";
+      $(".j-discussion").html(html);
+    });
+  });
+});
+</script>
