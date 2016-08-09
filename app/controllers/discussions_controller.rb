@@ -15,6 +15,10 @@ class DiscussionsController < ApplicationController
   # GET /discussions/1
   # GET /discussions/1.json
   def show
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @discussion }
+    end
   end
 
   # GET /discussions/new

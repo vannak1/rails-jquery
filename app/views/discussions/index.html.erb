@@ -68,8 +68,14 @@
 
 <script type="text/javascript" charset="utf-8">
 $(function () {
+  $('.show-btn').on('click', function(e){
+    event.stopPropagation();
+    console.log("clicked");
+  });
+
   $('form').submit(function(event) {
     event.preventDefault();
+    event.stopPropagation();
     var values = $(this).serialize();
     var posting = $.post('discussions', values);
 
@@ -86,6 +92,7 @@ $(function () {
       html += '        <div class="media-body">'
       html += '          <h3 class="media-heading font-1">' + data.title + '</h3>'
       html += '          <p>Asked by ' + data["user"]["name"] + '</p>'
+      html += '          <button class="show-btn">Click</button>'
       html += '          <a href="/discussions/' + data.id + '">Show</a>'
       html += '          <% if current_user.admin? %>'
       html += '            <%= link_to 'Edit', edit_discussion_path(discussion) %> | <%= link_to 'Destroy', discussion, method: :delete, data: { confirm: 'Are you sure?' } %>'
@@ -116,6 +123,7 @@ $(function () {
           html += '        <div class="media-body">'
           html += '          <h3 class="media-heading font-1">' + data[i].title + '</h3>'
           html += '          <p>Asked by ' + data[i]["user"]["name"] + '</p>'
+          html += '          <button class="show-btn">Click</button>'
           html += '          <a href="/discussions/' + data[i].id + '">Show</a>'
           html += '          <% if current_user.admin? %>'
           html += '            <%= link_to 'Edit', edit_discussion_path(discussion) %> | <%= link_to 'Destroy', discussion, method: :delete, data: { confirm: 'Are you sure?' } %>'
@@ -131,4 +139,6 @@ $(function () {
     });
   });
 });
+
+
 </script>
