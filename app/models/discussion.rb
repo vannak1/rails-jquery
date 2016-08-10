@@ -4,6 +4,4 @@ class Discussion < ActiveRecord::Base
   belongs_to :user
 
   validates_presence_of :title, :content
-  validates :title, length: {minimum: 5}
-  validates :content, length: {minimum: 5}
 end

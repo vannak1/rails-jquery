@@ -25,12 +25,12 @@
 
   <fieldset class="form-group">
     <%= f.label :title %><br>
-    <%= f.text_field :title, class: "form-control" %>
+    <%= f.text_field :title, class: "form-control", required: true %>
   </fieldset>
 
   <fieldset class="form-group">
     <%= f.label :content %><br>
-    <%= f.text_area :content, class: "form-control" %>
+    <%= f.text_area :content, class: "form-control", required: true %>
   </fieldset>
   <div class="actions">
     <%= f.submit 'Submit', class: "btn btn-primary pull-right" %>
@@ -55,27 +55,29 @@ $(function () {
     var posting = $.post('discussions', values);
 
     posting.done(function(data){
-      var newDiscussion = new DiscussionData(data[i]["id"], data[i]["title"], data[i]["content"], data[i]["user"], data[i]["comments"])
-      var html = "";
-      html += '<div class="discussion-thread" data-id=' + newDiscussion.id + '>'
-      html += '<div class="container">'
-      html += '  <div class="row" style="margin-top: 10px;">'
-      html += '    <div class="col-md-8 bg-white">'
-      html += '      <div class="media">'
-      html += '        <div class="media-left">'
-      html += '            <%= image_tag("pen") %>'
-      html += '        </div>'
-      html += '        <div class="media-body">'
-      html += '          <h3 class="media-heading font-1">' + newDiscussion.title + '</h3>'
-      html += '          <p>Asked by ' + newDiscussion.author() + '</p>'
-      html += '          <a href="/discussions/' + newDiscussion.id + '">Show</a>'
-      html += '       </div>'
-      html += '      </div>'
-      html += '    </div>'
-      html += '  </div>'
-      html += '</div>'
-      html += '</div>'
+        var html = "";
+        var newDiscussion = new DiscussionData(data["id"], data["title"], data["content"], data["user"], data["comments"]);
+        html += '<div class="discussion-thread" data-id=' + newDiscussion.id + '>';
+        html += '<div class="container">';
+        html += '  <div class="row" style="margin-top: 10px;">';
+        html += '    <div class="col-md-8 bg-white">';
+        html += '      <div class="media">';
+        html += '        <div class="media-left">';
+        html += '            <%= image_tag("pen") %>';
+        html += '        </div>';
+        html += '        <div class="media-body">';
+        html += '          <h3 class="media-heading font-1">' + newDiscussion.title + '</h3>';
+        html += '          <p>Asked by ' + newDiscussion.author() + '</p>';
+        html += '          <a href="/discussions/' + newDiscussion.id + '">Show</a>';
+        html += '       </div>';
+        html += '      </div>';
+        html += '    </div>';
+        html += '  </div>';
+        html += '</div>';
+        html += '</div>';
+
       $(".j-discussion").append(html);
+      console.log(html)
     });
   });
 
