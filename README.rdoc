@@ -6,8 +6,10 @@ This is the extension for the rails project that utlizies Jquery. It's an educat
 == Must render at least one index page via jQuery and an Active Model Serialization JSON Backend.
 Discussion index page sends a request to fetch json and then renders it in the js-discussion div.
 ==Must render at least one show page via jQuery and an Active Model Serialization JSON Backend.
+Discussion show page renders with jquery and uses JSON backend.
 ==The rails API must reveal at least one has-many relationship in the JSON that is then rendered to the page.
 Discussion belongs to user and user has_many discussion.  This is used to display the author's name on the discussion index.
 ==Must use your Rails API and a form to create a resource and render the response without a page refresh.
 A form is available on the Discussion index page that will post new threads and append it to the div without refresh.
 ==Must translate the JSON responses into Javascript Model Objects. The Model Objects must have at least one method on the prototype. Formatters work really well for this.
+Json object with prototype method author made for Discussion Data on Discussion index and Discussion show page.  This is then used to return author name.

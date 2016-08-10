@@ -1,16 +1,21 @@
-<div class="container">
+<div class="container discussion-show" data-id="<%=@discussion.id%>" data-count="<%= @count %>">
   <div class="row" style="padding-bottom: 10px;">
    <div class="col-md-9 bg-white">
-      <h2 class="font-2"><%= @discussion.title %></h2>
+      <h2 class="font-2 title"><%= @discussion.title %></h2>
       <hr>
-      <h4 class='font-3'><%= @discussion.content %></h4>
+      <h4 class='font-3 content'><%= @discussion.content %></h4>
       <br>
-      <p>Posted by <%= @discussion.user.email %> <%= time_ago_in_words(@discussion.created_at) %> ago</p>
+      <p class='author'>Posted by <%= @discussion.user.email %> <%= time_ago_in_words(@discussion.created_at) %> ago</p>
 
       <div class="links btn-group">
+        <button class="next-js">Next Discussion</button>
         <%= link_to "Back", root_path, class: "btn btn-default" %>
         <% if @discussion.user_id == current_user.id || current_user.admin? %>
+          <a href="2/edit" class="btn btn-default">Edit</a>
+          <a data-confirm="Are you sure?" class="btn btn-default" rel="nofollow" data-method="delete" href="2">Delete</a>
+
           <%= link_to "Edit", edit_discussion_path(@discussion), class: "btn btn-default" %>
+
           <%= link_to "Delete", discussion_path(@discussion), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-default" %>
         <% end %>
       </div>
@@ -20,7 +25,52 @@
      </div>
     </div>
     <hr>
-    <%= render @discussion.comments.order_by_vote %>
+    <div class="comments">
+      <%= render @discussion.comments.order_by_vote %>
+    </div>
 </div>
 
 <!-- renders the _comment.html.erb partial file. -->
+<script>
+$(function(){
+  $(".next-js").click(function(){
+    var id = $(".discussion-show").data("id");
+    var last = $(".discussion-show").data("count");
+    var next = id == last ? 1 : id + 1;
+    var url = "http://localhost:3000/discussions/" + next;
+    $.getJSON(url, function(data){
+      var newDiscussion = new DiscussionData(data["id"], data["title"], data["content"],
+                              data["user"], data["comments"]);
+      console.log(newDiscussion)
+      $(".title").html(newDiscussion.title);
+      $(".content").html(newDiscussion.content);
+      $(".author").html("Posted by " + newDiscussion.author() + ".");
+      $(".discussion-show").data("id", newDiscussion.id);
+
+      var len = newDiscussion.comments.length;
+      var html = '';
+      for(var i = 0; i < len; i++){
+        html += '<div class="panel panel-default">'
+        html += '     <div class="panel-body">'
+        html += '   <p class="comment-content">' + newDiscussion.comments[i].content +'</p>'
+        html += '   <p class="comment-posted-by">Posted by ' + newDiscussion.comments[i].user["name"] + '.</p>'
+        html += ' </div></div> '
+      }
+      $(".comments").html(html);
+      console.log(html);
+    });
+  });
+});
+
+function DiscussionData(id, title, content, user, comments){
+  this.id = id;
+  this.title = title;
+  this.content = content;
+  this.user = user;
+  this.comments = comments;
+  this.author = function(){
+    return user["name"];
+  }
+}
+
+</script>
