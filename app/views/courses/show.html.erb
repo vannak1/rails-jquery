@@ -1,0 +1,144 @@
+
+<div class="container">
+  <h1 class="font-1"><%= @course.title %></h1>
+  <% if current_user.admin? %>
+    <%= link_to 'New Lesson', new_course_lesson_path(@course) %> |
+    <%= link_to 'Edit', edit_course_path(@course) %> |
+    <%= link_to 'Back', courses_path %>
+  <% end %>
+</div>
+<div class="container">
+<div class="row">
+    <div class="col-md-8">
+      <div class="padding bg-white root-main" >
+                 <h4 class="font-1"><%= @course.title %></h4>
+                 <hr>
+                   <h4 class="font-3"><%= @course.description %></h4>
+      </div>
+    </div>
+
+    <div class="col-md-4 bg-white">
+      <div class="padding bg-white root-sidebar">
+            <h4 class="font-1">Motivation</h4>
+              <div class="content well bg-white">
+                <blockquote>
+                  <p class="quote font-3">The best preparation for tomorrow is doing your best today.
+                  </p>
+                  <footer class="author font-3">
+                    H. Jackson
+                  </footer>
+                <button class="btn btn-sharp" id="next">Motivate</button>
+               </blockquote>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% if @course.lessons.count != 0 %>
+  <div class="container">
+    <h1 class="font-1">Lesson</h1>
+  </div>
+
+  <% @course.lessons.each do |lesson| %>
+    <div class="container">
+      <div class="row" style="margin-top: 10px;">
+        <!-- begin course panels -->
+        <div class="col-md-8 bg-white">
+          <div class="media">
+            <div class="media-left">
+                <%= image_tag("badge") %>
+            </div>
+            <div class="media-body">
+              <h3 class="media-heading font-1"><%= lesson.title %></h3>
+              <% if lesson.completed? %>
+                <p class="font-2"> Great Job! You've completed the lesson.
+                <p class="font-2"><%= link_to "Review Lesson", [lesson.course, lesson] %><p>
+              <% else %>
+                <p class="font-2"><%= link_to "Start Lesson", [lesson.course, lesson] %><p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <!-- end course panels -->
+      </div>
+    </div>
+  <% end %>
+<% end %>
+<!-- script to push new quotes into sidebar -->
+<script>
+  /* script fix turbolinks not resizing main and sidebar */
+  $('.root-main').height($('.root-sidebar').height());
+  $(document).ready(function(){
+    $('.root-main').height($('.root-sidebar').height());
+  });
+  /* quote script */
+  var arr = [{
+  quote: "Don't spend time beating on a wall, hoping to transform it into a door.",
+  author: "Coco Chanel"
+  },
+  {
+  quote: "What you get by achieving your goals is not as important as what you become by achieving your goals.",
+  author: "Henry David Thoreau"
+  },
+  {
+  quote: "If the plan doesn’t work, change the plan, but never the goal.",
+  author: "Unknown"
+  },
+  {
+  quote: "Don’t live the same year 75 times and call it a life.",
+  author: "Robin Sharma"
+  },
+  {
+  quote: "The best preparation for tomorrow is doing your best today.",
+  author: "H. Jackson"
+  }];
+
+  $(document).ready(function(){
+    var i = 0;
+    var newArr = arr.slice(0);
+    shuffle(newArr);
+    $("#next").on("click", function(){
+      if(i > newArr.length - 1){
+        shuffle(newArr);
+        i = 0;
+      };
+      var quote = newArr[i].quote;
+      var author = newArr[i].author;
+      console.log(quote + " " + author);
+      $(".quote").html(quote);
+      $(".author").html(author);
+      i++;
+    })
+  });
+
+  <!-- turbolinks fix -->
+  var i = 0;
+  var newArr = arr.slice(0);
+  shuffle(newArr);
+  $("#next").on("click", function(){
+    if(i > newArr.length - 1){
+      shuffle(newArr);
+      i = 0;
+    };
+    var quote = newArr[i].quote;
+    var author = newArr[i].author;
+    console.log(quote + " " + author);
+    $(".quote").html(quote);
+    $(".author").html(author);
+    i++;
+  })
+  <!-- end fix -->
+
+  function shuffle(arr){
+    var m = arr.length, t, i;
+
+    while(m){
+    i = Math.floor(Math.random()*m--);
+    t = arr[m];
+    arr[m] = arr[i];
+    arr[i] = t;
+    }
+    return arr;
+  }
+</script>

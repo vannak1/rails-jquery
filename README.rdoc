@@ -1,0 +1,15 @@
+== README
+
+This is the extension for the rails project that utlizies Jquery. It's an educational platform that manages courses and lessons.  Students can enroll in courses and complete lessons.  When a student has a question, they can use the discussion feature.  Other users can answer the questions.  Answers have an upvote feature that allows other readers to vote for the best answers.
+
+
+== Must render at least one index page via jQuery and an Active Model Serialization JSON Backend.
+Discussion index page sends a request to fetch json and then renders it in the js-discussion div.
+==Must render at least one show page via jQuery and an Active Model Serialization JSON Backend.
+
+==The rails API must reveal at least one has-many relationship in the JSON that is then rendered to the page.
+Discussion belongs to user and user has_many discussion.  This is used to display the author's name on the discussion index.
+==Must use your Rails API and a form to create a resource and render the response without a page refresh.
+A form is available on the Discussion index page that will post new threads and append it to the div without refresh.
+==Must translate the JSON responses into Javascript Model Objects. The Model Objects must have at least one method on the prototype. Formatters work really well for this.
+Line 109 in index for discussion defines a method on the prototype for DiscussionData that returns the user name, which is in this case, the author.

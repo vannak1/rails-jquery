@@ -1,0 +1,321 @@
+body{
+  background-color: rgba(241, 241, 241, 1);
+  font-family: 'Roboto', sans-serif;
+}
+
+h1, h2, h3, h4, p {
+  padding: 15px 4px 4px 8px;
+}
+.hero-container {
+  height: 300px;
+}
+.hero-sign_up {
+  padding: 15px;
+  margin-top: 15px;
+}
+
+.bg-gradient {
+  background: linear-gradient(to bottom, #20202c 0%,#515175 100%);
+}
+
+.bg-cartoon {
+  background: #fff url(<%= asset_path 'cartoon_girl.jpg' %>);
+  background-position: top left;
+  background-size: cover;
+}
+
+.bg-country {
+  background: #fff url(<%= asset_path 'Undiscovered-Cambodia-Asia-8.jpg' %>);
+  background-position: top left;
+  background-size: cover;
+  opacity: 0.7;
+  filter: alpha(opacity=80);
+}
+
+.footer {
+  background: rgba(5, 78, 133, 1);
+}
+.bg-blue {
+  background: rgba(5, 78, 133, .9);
+}
+
+.bg-white {
+  background: rgba(255, 255, 255, 1);
+}
+
+.user-show-main {
+  min-height: 200px;
+}
+
+.user-show-sidebar {
+  min-height: 200px;
+}
+/* na links */
+/*.navbar-brand.text-white , ul.nav li a, ul.nav li a:visited {
+    color: #fff;
+}
+
+ul.nav li a:hover, ul.nav li a:active {
+    color: gray;
+}
+
+ul.nav li.active a {
+    color: #fff;
+}
+
+.navbar-toggle {
+  background: white;
+}*/
+
+.navbar {
+  border: 0;
+}
+/* Fonts */
+.font-1 {
+    font-family: 'Alegreya', serif;
+    font-weight: 700;
+    }
+
+.font-2 {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    }
+
+.font-3 {
+    font-family: 'Roboto', sans-serif;
+    }
+
+.font-white {
+  color: white;
+}
+/* buttons */
+.btn {
+    padding: 14px 24px;
+    border: 0 none;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.btn:focus, .btn:active:focus, .btn.active:focus {
+    outline: 0 none;
+}
+
+.btn-primary {
+    background: #0099cc;
+    color: #ffffff;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+    background: #33a6cc;
+}
+
+.btn-primary:active, .btn-primary.active {
+    background: #007299;
+    box-shadow: none;
+}
+
+.btn.sharp {
+  border-radius:0;
+}
+
+.btn.outline {
+	background: none;
+	padding: 12px 22px;
+}
+
+.btn.outline-white {
+	background: none;
+	padding: 12px 22px;
+  border: 2px solid #fff;
+  color: #fff;
+}
+
+.btn.outline-white:hover, .btn.outline-white:focus, .btn.outline-white:active {
+    background: #fff;
+    color: rgba(5, 78, 133, 1);
+}
+
+.btn.outline-white:active, .btn.outline-white.active {
+    background: #fff;
+    box-shadow: none;
+}
+
+.btn.outline-white-inverted {
+	background: #fff;
+	padding: 12px 22px;
+  border: 2px solid #fff;
+  color: rgba(5, 78, 133, 1);
+
+}
+
+.btn.outline-white-inverted:hover, .btn.outline-white:focus, .btn.outline-white:active {
+    background:none;
+    color: #fff;
+}
+
+.btn.outline-white-inverted:active, .btn.outline-white.active {
+    box-shadow: none;
+    color: #fff;
+}
+.btn-primary.outline {
+	border: 2px solid #0099cc;
+	color: #0099cc;
+}
+
+.btn-primary.outline:hover, .btn-primary.outline:focus, .btn-primary.outline:active, .btn-primary.outline.active, .open > .dropdown-toggle.btn-primary {
+  background: rgba(40, 165, 230, 1);
+  color: #fff;
+	border-color: #33a6cc;
+}
+.btn-primary.outline:active, .btn-primary.outline.active {
+	border-color: #007299;
+	color: #007299;
+	box-shadow: none;
+}
+
+.btn-lg.round.clear {
+  background: rgba(255,255,255, .1);
+  border-color: white;
+	border-radius: 24px;
+  color: white;
+  line-height: 6px;
+  font-size: 12px;
+}
+
+.btn-lg.round.clear:hover {
+  background: rgba(255,255,255, 1);
+	border-radius: 24px;
+  color: rgba(40, 165, 230, 1);
+  line-height: 6px;
+  font-size: 12px;
+}
+
+.btn-lg.round.white {
+  background: rgba(255,255,255, 1);
+  border-color: white;
+	border-radius: 24px;
+  color: rgba(40, 165, 230, 1);
+  line-height: 6px;
+  font-size: 12px;
+}
+
+.btn-lg.round.white:hover {
+  background: rgba(255,255,255, .4);
+	border-radius: 24px;
+  color: white;
+  line-height: 6px;
+  font-size: 12px;
+}
+
+.btn-login {
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+.btn-circle, .btn-circle-3d{
+  border-radius: 50% !important;
+}
+
+.btn-primary.btn-circle{
+  -webkit-box-shadow: 0px 0px 3px 1px #245580;
+  -moz-box-shadow:    0px 0px 3px 1px #245580;
+  box-shadow:         0px 0px 3px 1px #245580;
+}
+
+.btn-info.btn-circle{
+  -webkit-box-shadow: 0px 0px 3px 1px #28a4c9;
+  -moz-box-shadow:    0px 0px 3px 1px #28a4c9;
+  box-shadow:         0px 0px 3px 1px #28a4c9;
+}
+
+.btn-success.btn-circle{
+  -webkit-box-shadow: 0px 0px 3px 1px #3e8f3e;
+  -moz-box-shadow:    0px 0px 3px 1px #3e8f3e;
+  box-shadow:         0px 0px 3px 1px #3e8f3e;
+}
+
+.btn-danger.btn-circle{
+  -webkit-box-shadow: 0px 0px 3px 1px #b92c28;
+  -moz-box-shadow:    0px 0px 3px 1px #b92c28;
+  box-shadow:         0px 0px 3px 1px #b92c28;
+}
+
+.btn-warning.btn-circle{
+  -webkit-box-shadow: 0px 0px 3px 1px #e38d13;
+  -moz-box-shadow:    0px 0px 3px 1px #e38d13;
+  box-shadow:         0px 0px 3px 1px #e38d13;
+}
+
+.btn-default.btn-circle{
+  -webkit-box-shadow: 0px 0px 3px 1px #ccc;
+  -moz-box-shadow:    0px 0px 3px 1px #ccc;
+  box-shadow:         0px 0px 3px 1px #ccc;
+}
+
+/* Panels */
+.panel{
+  /*padding: 5px 20px;*/
+}
+.panel-gray {
+  background: rgba(241, 241, 241, 1);
+}
+
+/* User Icon */
+.circle-user {
+    background: rgba(255, 255, 255, .5);
+    padding: 10px;
+    border-radius: 100%;
+    color: white;
+}
+
+/* Forms */
+.form {
+  padding: 20px 20px;
+  text-align: center;
+}
+
+.text.field input {
+  margin-top: 5px;
+  text-align: center;
+  padding-left: 10px;
+  height: 34px;
+  width: 100%;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  border-top: none;
+  border-bottom: 1px solid #DDD;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.39), 0 -1px 1px #FFF, 0 1px 0 #FFF;
+}
+select {
+  padding-left: 10px;
+  margin-bottom: 5px;
+  height: 34px;
+  width: 100%;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  border-top: none;
+  border-bottom: 1px solid #DDD;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.39), 0 -1px 1px #FFF, 0 1px 0 #FFF;
+}
+
+hr {
+   color: #d2c2d1;
+   background: #d1d2d2;
+   width: 100%;
+   height: 1px;
+}
+
+/* Media Styling */
+.media img {
+  padding: 12px;
+}
+
+.media{
+  padding: 15px 15px 10px 10px;
+}
+
+.padding {
+  padding: 6px;
+}

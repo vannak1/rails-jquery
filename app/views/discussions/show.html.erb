@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row" style="padding-bottom: 10px;">
+   <div class="col-md-9 bg-white">
+      <h2 class="font-2"><%= @discussion.title %></h2>
+      <hr>
+      <h4 class='font-3'><%= @discussion.content %></h4>
+      <br>
+      <p>Posted by <%= @discussion.user.email %> <%= time_ago_in_words(@discussion.created_at) %> ago</p>
+
+      <div class="links btn-group">
+        <%= link_to "Back", root_path, class: "btn btn-default" %>
+        <% if @discussion.user_id == current_user.id || current_user.admin? %>
+          <%= link_to "Edit", edit_discussion_path(@discussion), class: "btn btn-default" %>
+          <%= link_to "Delete", discussion_path(@discussion), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-default" %>
+        <% end %>
+      </div>
+      <h3>Reply to question:</h3>
+      <!-- renders the comments form -->
+      <%= render 'comments/form' %>
+     </div>
+    </div>
+    <hr>
+    <%= render @discussion.comments.order_by_vote %>
+</div>
+
+<!-- renders the _comment.html.erb partial file. -->
+<script>
+
+
+</script>
